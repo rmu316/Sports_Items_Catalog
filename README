@@ -1,0 +1,76 @@
+# Sports Item Catalog - Udacity
+### Full Stack Web Development ND
+_______________________
+
+## About
+This project uses the following web technologies to create a full-on web application which stores
+sports items for a variety of different sports as a catalog
+* SQLAlchemy (for making SQL calls using python libraries)
+* Flask (for generating and handling simple routing of web app files to python functions)
+* Facebook Login (3rd party authentication and authorization service for user login validation and control)
+
+## Prerequisites
+This application is quite extensive, so please pay close attention all the instruction steps, so that you
+setup everything necessary to run this app successfully:
+
+1. Make sure that python version 2 or 3 is installed: https://www.python.org/downloads/
+2. Install VirtualBox VM: https://www.virtualbox.org/wiki/Downloads
+3. Install Vagrant: https://www.vagrantup.com/downloads.html
+5. Unzip the sports_catalog.zip file, and place all its contents into your vagrant directory.
+6. Setup your vagrant VM using the command "vagrant up"
+7. Once the VM is up, login using the command "vagrant ssh"
+8. From there, type "cd /vagrant/" to log into the vagrant main directory.
+9. Now run the file database_setup.py to setup the SQL database: python database_setup.py
+10. Now run loadcategories.py to load all the sports categories into the Category table in the database: python loadcategories.py
+
+## Testing
+* In the vagrant command line, simply run the following command:
+
+vagrant@vagrant:/vagrant$ python application.py
+
+* Initally, you should see the subtitle 'Categories' (like baseball, basketball, soccer, etc.) on the left side
+and the subtitle 'Latest Items' with no items
+--> path: localhost:5000
+
+## What to test for
+
+# Login authentication functionality
+* To add an item, you need to login as a user to the web app! To do so, click on the 'Login' link in the top right corner of
+the main page
+* Once on the login page, login with one of the following 3 credentials (these are test users I created on FB's developer page)
+1. Email: linda_cthwxmn_seligsteinwitz@tfbnw.net, Password: iloveudacity
+2. Email: abigail_zlgprzk_adeagboson@tfbnw.net, Password: iloveudacity
+3. Email: donna_upneaup_greeneman@tfbnw.net, Password: iloveudacity
+* When you log in through FB, you'll see a brief welcome message (with name, profile pic, and a redirect in 2 seconds)
+
+# CREATE functionality
+* Now that you are logged in, you'll notice on the main page that you have the option to ADD items to the catalog. Click on the
+'Add Items' link about the 'Latest Items' subtitle
+* Once you add an item, you can click on the Item name on the main page to see the item name and description you gave it.
+* NOTE: you MUST be logged in to create an item! Accessing the link localhost:5000/catalog/new without logging in will redirect
+you to the login page
+
+# READ functionality
+* Try clicking on the links for each of the sports categories. They should take you to a similar page which shows all items
+in the category (initially empty)
+--> path: localhost:5000/catalog/<category_name>/items, e.g. localhost:5000/catalog/Basketball/items/
+* You'll also notice an avatar on the right side of the Sports Catalog banner which tells you which user created this item.
+
+# UPDATE functionality/Authorization functionality
+* Feel free to edit items with each user! Path is localhost:5000/catalog/<Item_name>/edit/
+* NOTE: you MUST be logged on, as well as the CREATOR of an item, in order to edit!
+
+# DELETE functionality/Authorization functionality
+* Feel free to delete items! Path is localhost:5000/catalog/<Item_name>/delete/
+* NOTE: you MUST be logged on, as well as the CREATOR of an item, in order to delete it! 
+* For edit and delete, you should try logging in as different users and see that you can ONLY edit or delete an item if you
+are logged on as the user who created it originally!
+
+# Logout functionality
+* You can also logout, and see that once logged out, you CANNOT add, create, or delete any items; you can ONLY view items!
+
+# JSON Endpoints Display
+* You can also display a JSON endpoint of all categories and items in the catalog simply by accessing this URL path:
+localhost:5000/catalog.json
+* You can also display a JSON endpoint for a single item by specifying the category name as well as item name which the item
+is under: localhost:5000/catalog.json/Basketball/Hoop

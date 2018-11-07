@@ -1,0 +1,38 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+	<div class="row divider blue">
+		<div class="col-md-12"></div>
+	</div>
+	<div class="row banner main">
+		<div class="col-md-1"></div>
+		<div class="col-md-11 padding-none">
+			<h1>Sports Catalog</h1>
+		</div>
+	</div>
+
+
+	{% include "flash_messages.html" %}
+
+
+	<div class="row padding-top padding-bottom">
+		<div class="col-md-1"></div>
+		<div class="col-md-1 padding-none">
+			<h2>Categories</h2>
+			{% for category in categories %}
+		    <a href="{{url_for('showCategory', category_name=category.name)}}">
+		    	<h3>{{category.name}}</h3>
+			</a>
+	        {% endfor %}
+		</div>
+		<div class="col-md-1"></div>
+		<div class="col-md-3 padding-none">
+			<h2>{{category.name}} Items ({{size}} items)</h2>
+			{% for item in items %}
+			<a href="{{url_for('showItem', category_name=category.name, item_name=item.title)}}">
+		    	<h3>{{item.title}}</h3>
+		    </a>
+	        {% endfor %}
+		</div>
+	</div>
+{% endblock %}

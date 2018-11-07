@@ -1,0 +1,137 @@
+* {
+	font-family: "Serif", Roboto, Helvetica, Arial, sans-serif;
+	font-weight: 700;
+}
+h1 {
+	font-family: "Serif", Roboto, Helvetica, Arial, sans-serif;
+	font-size: 60px;
+	color: green;
+	line-height: 60px;
+	font-weight: 300;
+}
+h2 {
+	font-size: 24px;
+	color: lightskyblue;
+	line-height: 29px;
+}
+h3, a {
+    font-size: 18px;
+	color: dimgrey;
+	line-height: 23px;
+}
+p {
+ 	font-family: "Serif", Roboto, Helvetica, Arial, sans-serif;
+ 	font-size: 16px;
+ 	line-height: 24px;
+ 	font-weight: 400;
+}
+strong {
+ 	font-size: 16px;
+ 	color: red;
+ 	line-height: 24px;
+}
+i {
+	font-size: 18px;
+	color: black;
+	line-height: 17px;
+}
+.btn {
+	padding: 20px;
+	margin: 0;
+	border-color: yellowgreen;
+	border-width: 2px;
+	color: yellowgreen;
+}
+.btn:hover {
+	border-color: yellowgreen;
+}
+.btn.delete {
+	border-color: blue;
+	border-width: 2px;
+	color: blue;
+}
+.btn.delete:hover {
+	border-color: blue;
+	color: red;
+}
+.banner.main {
+	height: 150px;
+	background: url("/static/top-banner.jpg");
+	background-position: right;
+	background-repeat: no-repeat;
+	background-size: cover;
+	border-style: solid;
+	border-color: lightskyblue;
+	border-radius: 15px;
+}
+.banner.profile {
+	height: 150px;
+	background-color: darkturquoise;
+}
+.banner h1 {
+	margin: 45px 0;
+}
+.user {
+	padding-right: 10px;
+	margin-top: -40px;
+	text-align: center;
+	float:right;
+}
+.user img {
+	width: 100px;
+	border-radius: 50%;
+}
+.user figcaption {
+	font-size: 14px;
+	font-weight: 400;
+	margin-top: -20px;
+}
+.glyphicon {
+	margin-right: 10px;
+}
+.divider {
+	height: 15px;
+}
+.top {
+	padding-top: 30px;
+	padding-bottom: 30px;
+	background-color: yellowgreen;
+	border-style: solid;
+	border-color: lightskyblue;
+	border-radius: 15px;
+}
+.top p {
+	margin-bottom: 0;
+	line-height: 16px;
+}
+.top a {
+	margin-bottom: 0;
+	line-height: 16px;
+	font-size: 16px;
+	color: red;
+	font-weight: 400;
+}
+.padding-top-top {
+	padding: 15px;
+}
+.padding-top {
+	padding-top: 30px;
+}
+.padding-bottom {
+	padding-bottom: 30px;
+}
+.margin-right {
+	margin-right: 30px;
+}
+.padding-none {
+	padding: 0;
+}
+.flash {
+	background-color: yellowgreen;
+	width:100%;
+	text-decoration: none;
+}
+.flash li {
+	list-style-type: none;
+	text-align: center;
+}

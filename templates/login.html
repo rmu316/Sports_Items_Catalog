@@ -1,0 +1,99 @@
+{% extends "main.html" %}
+{% block content %}
+<head>
+    <!--LOAD PRE-REQUISITES FOR GOOGLE SIGN IN -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="//apis.google.com/js/platform.js?onload=start"> </script>
+    <!-- END PRE-REQUISITES FOR GOOGLE SIGN IN -->
+</head>
+
+<div class="row divider blue">
+    <div class="col-md-12"></div>
+</div>
+<div class="row banner main">
+    <div class="col-md-1"></div>
+    <div class="col-md-11 padding-none">
+        <h1>Sports Catalog</h1>
+    </div>
+</div>
+
+
+{% include "flash_messages.html" %}
+
+
+<div id="result">
+    <div class="row padding-top padding-bottom">
+        <div class="col-md-1"></div>
+        <div class="col-md-11 padding-none">
+            <fb:login-button scope="public_profile,email" onlogin="sendTokenToServer();">
+                <a href='javascript:sendTokenToServer()'>Login with Facebook</a>
+            </fb:login-button>
+            <h3>As a logged-in user, you'll have the privelege to create, edit, and delete your own Items!</h3>
+        </div>
+    </div>
+</div>
+
+<!--FACEBOOK SIGN IN -->
+<script>
+    // Note: this is a standard call from Facebook Login's API, given to me when I
+    // registered for an app ID and secret on Facebook's OAuth (https://developers.facebook.com/apps/)
+    // Citing Facebook Login SDK here for providing this boilerplate code
+    window.fbAsyncInit = function() {
+    FB.init({
+            appId      : '255947301733403', // my app ID
+            cookie     : true,  // enable cookies to allow the server to access 
+                            // the session
+            xfbml      : true,  // parse social plugins on this page
+            version    : 'v3.2' // as of Nov 1, 2018
+        });
+    };
+
+    // Load the SDK asynchronously
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    // After a user clicks on the 'Login to Facebook' button
+    // and enters his/her credentials, we call this function
+    // to communicated with our server code in application.py
+    // to grab appropriate info from FB regarding the user
+    // Then, we display a temporary page that the user is
+    // successfully logged in, before directing them back to
+    // the main page of the catalog
+    function sendTokenToServer() {
+        var access_token = FB.getAuthResponse()['accessToken'];
+        console.log(access_token)
+        console.log('Welcome!  Fetching login information....');
+        FB.api('/me', function(response) {
+            console.log('Successful login for: ' + response.name);
+           $.ajax({
+                type: 'POST',
+                url: '/fbconnect?state={{STATE}}',
+                processData: false,
+                data: access_token,
+                contentType: 'application/octet-stream; charset=utf-8',
+                success: function(result) {
+                    // Handle or verify the server response if necessary.
+                    if (result) {
+                        $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...')
+                        setTimeout(function() {
+                            window.location.href = "/catalog";
+                        }, 2000);
+                    } else {
+                        $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+                        setTimeout(function() {
+                            window.location.href = "/login";
+                        }, 2000);
+                    }
+                }
+            });
+        });
+    }
+</script>
+<!--END FACEBOOK SIGN IN -->
+
+{% endblock %}
